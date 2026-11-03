@@ -286,7 +286,7 @@ def verdict_dc(rows: list):
     four = next(r for r in rows if r["Gitter"] == "4×4")
     return ("success" if ok else "error"), (f"Deletion–Contraction hat genau so viele Blätter wie der Graph Spannbäume (bei allen {sum(1 for r in rows if r['Blätter'] is not None)} gerechneten Gittern gleich; 4×4: {big_text(four['Blätter'])} Blätter in {big_text(four['Aufrufe'])} Aufrufen, "
                                             f"nicht {big_text(four['Mengen'])} Kantenmengen). Fasst man gleiche Teilgraphen zusammen, braucht das 5×5-Gitter {big_text(big['Aufrufe mit Zusammenfassen'])} Aufrufe statt {big_text(big['Spannbäume'])} Blättern; "
-                                            f"die Frontier-Rechnung kommt mit {big_text(big['Frontier-Zustände'])} Zuständen aus, und alle drei Wege liefern dasselbe Polynom.")
+                                            f"die Frontier-Rechnung kommt mit {big_text(big['Frontier-Zustände'])} Zuständen aus, und Deletion–Contraction mit Zusammenfassen und die Frontier-Rechnung liefern dasselbe Polynom.")
 
 
 # ----------------------------------------------------------------------------- Experiment 2: ein Polynom, viele Zahlen
@@ -367,7 +367,7 @@ def verdict_frontier(rows: list):
     ok = same and cat and wide["Monome"] == narrow["Monome"] and wide["Spannbäume"] == narrow["Spannbäume"]
     last = sq[-1]
     return ("success" if ok else "error"), (f"Dieselben Zustände wie die Spannbäume in Stück 13 (Summen {', '.join(big_text(r['Zustände']) for r in sq)} für n = {sq[0]['Gitter'][0]} bis {last['Gitter'][0]}), nur ist der Wert ein Polynom: beim {last['Gitter']}-Gitter {big_text(last['Monome'])} Monome. "
-                                            f"Die größte Schicht ist bei allen quadratischen Gittern die Catalan-Zahl ({', '.join(big_text(r['größte Schicht']) for r in sq)}). "
+                                            f"Die größte Schicht ist bei den quadratischen Gittern {sq[0]['Gitter']} bis {last['Gitter']} die Catalan-Zahl ({', '.join(big_text(r['größte Schicht']) for r in sq)}; gemessen, nicht bewiesen, in Phase 0 auch beim 8×8-Gitter). "
                                             f"Die Ordnung entscheidet wie in Stück 13: das 3×8-Gitter hat in Zeilenordnung (Frontier {wide['Frontier']}) {big_text(wide['Zustände'])} Zustände, dasselbe Gitter als 8×3 (Frontier {narrow['Frontier']}) nur {big_text(narrow['Zustände'])}, beide mit {big_text(wide['Spannbäume'])} Spannbäumen.")
 
 
@@ -424,7 +424,7 @@ def verdict_reliability(rows: list):
     g6 = next(r for r in rows if r["Graph"] == "Gitter 6×6")
     s9 = next(s for s in g6["Ziehungen"] if s["p"] == 0.9)
     mono = all(r["Kurve"][i][1] < r["Kurve"][i + 1][1] for r in rows for i in range(len(r["Kurve"]) - 1))
-    return ("success" if ok and mono else "error"), (f"Die exakte Zuverlässigkeit steigt mit p und liegt bei allen {len(zs)} Zufallsziehungen im Rahmen (größter Betrag von z: {de(max(abs(z) for z in zs), 2)}). "
+    return ("success" if ok and mono else "error"), (f"Die exakte Zuverlässigkeit steigt mit p und liegt bei allen {len(zs)} Zufallsziehungen im Rahmen (Schwelle: Betrag von z höchstens 4; größter Betrag von z: {de(max(abs(z) for z in zs), 2)}). "
                                                      f"Beim 6×6-Gitter mit p = 0,9: exakt {prob_text(Fraction(s9['exakt']).limit_denominator(10 ** 9))}, in {big_text(C.SAMPLE_DRAWS)} Ziehungen {de(s9['gezogen'], 5)}. Das Ziehen ist der Schätzer (Stück 15), das Polynom die Wahrheit.")
 
 

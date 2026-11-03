@@ -64,7 +64,7 @@ def test_ways_table_of_the_petersen_preset():
 def test_dc_verdict_exact():
     assert ev.verdict_dc(ev.dc_rows()) == ("success",
         "Deletion–Contraction hat genau so viele Blätter wie der Graph Spannbäume (bei allen 6 gerechneten Gittern gleich; 4×4: 100.352 Blätter in 497.030 Aufrufen, nicht 16.777.216 Kantenmengen). "
-        "Fasst man gleiche Teilgraphen zusammen, braucht das 5×5-Gitter 242.898 Aufrufe statt 557.568.000 Blättern; die Frontier-Rechnung kommt mit 1.259 Zuständen aus, und alle drei Wege liefern dasselbe Polynom.")
+        "Fasst man gleiche Teilgraphen zusammen, braucht das 5×5-Gitter 242.898 Aufrufe statt 557.568.000 Blättern; die Frontier-Rechnung kommt mit 1.259 Zuständen aus, und Deletion–Contraction mit Zusammenfassen und die Frontier-Rechnung liefern dasselbe Polynom.")
 
 
 def test_values_verdict_exact():
@@ -76,7 +76,7 @@ def test_values_verdict_exact():
 def test_frontier_verdict_exact():
     assert ev.verdict_frontier(ev.frontier_rows()) == ("success",
         "Dieselben Zustände wie die Spannbäume in Stück 13 (Summen 46, 251, 1.259, 6.001, 27.645 für n = 3 bis 7), nur ist der Wert ein Polynom: beim 7×7-Gitter 839 Monome. "
-        "Die größte Schicht ist bei allen quadratischen Gittern die Catalan-Zahl (5, 14, 42, 132, 429). "
+        "Die größte Schicht ist bei den quadratischen Gittern 3×3 bis 7×7 die Catalan-Zahl (5, 14, 42, 132, 429; gemessen, nicht bewiesen, in Phase 0 auch beim 8×8-Gitter). "
         "Die Ordnung entscheidet wie in Stück 13: das 3×8-Gitter hat in Zeilenordnung (Frontier 9) 17.657 Zustände, dasselbe Gitter als 8×3 (Frontier 4) nur 171, beide mit 59.817.135 Spannbäumen.")
 
 
@@ -88,7 +88,7 @@ def test_colors_verdict_exact():
 
 def test_reliability_verdict_exact():
     assert ev.verdict_reliability(ev.reliability_rows()) == ("success",
-        "Die exakte Zuverlässigkeit steigt mit p und liegt bei allen 9 Zufallsziehungen im Rahmen (größter Betrag von z: 2,04). Beim 6×6-Gitter mit p = 0,9: exakt 0,935088, in 30.000 Ziehungen 0,93550. "
+        "Die exakte Zuverlässigkeit steigt mit p und liegt bei allen 9 Zufallsziehungen im Rahmen (Schwelle: Betrag von z höchstens 4; größter Betrag von z: 2,04). Beim 6×6-Gitter mit p = 0,9: exakt 0,935088, in 30.000 Ziehungen 0,93550. "
         "Das Ziehen ist der Schätzer (Stück 15), das Polynom die Wahrheit.")
 
 

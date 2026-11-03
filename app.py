@@ -97,7 +97,7 @@ st.markdown(
     """
 **Wie viele Spannbäume, Färbungen, Orientierungen hat ein Graph, und wie zuverlässig ist er?** Das **Tutte-Polynom** T(x, y) beantwortet alle diese Fragen auf einmal: aus **einem** Polynom folgen die **Spannbäume** T(1, 1), die **azyklischen Orientierungen** T(2, 0),
 die **Färbungen** mit k Farben (das chromatische Polynom), die **Flüsse** und die **Zuverlässigkeit** (bleibt der Graph zusammenhängend, wenn jede Kante nur mit Wahrscheinlichkeit p hält). **Deletion–Contraction** (Kante löschen oder zusammenziehen) definiert es;
-die **Frontier-Rechnung** aus Stück 13 mit einem **Polynom als Wert** statt einer Zahl berechnet es, und ihre Zustände sind **dieselben** wie bei den Spannbäumen. Jede Zahl wird gegen einen unabhängigen Weg geprüft.
+die **Frontier-Rechnung** aus Stück 13 mit einem **Polynom als Wert** statt einer Zahl berechnet es, und ihre Zustände sind **dieselben** wie bei den Spannbäumen. Fast jede Zahl wird gegen einen unabhängigen Weg geprüft; wo die Prüfwege zu langsam sind, bleibt die Zahl ungeprüft.
 
 Weiter unten: **fünf Experimente** (**🔬**), eine **🎲 Spielwiese** für eigene Kantenlisten, **🚧 Wo die Annahmen enden** und der Expander **📐 Mathematische Formulierung**.
 """
@@ -187,7 +187,7 @@ verdict(verdict_dc(dc))
 st.markdown("---")
 
 st.subheader("🔬 Experiment 2: Ein Polynom, viele Zahlen")
-st.caption("Je Graph ein Polynom; daraus Spannbäume, Wälder, zusammenhängende Teilgraphen, azyklische Orientierungen und Färbungen mit drei und vier Farben. Jede Zahl ist gegen einen unabhängigen Weg geprüft (Kirchhoff, Zählen, Transfermatrix, Aufzählen, Teilmengensumme).")
+st.caption("Je Graph ein Polynom; daraus Spannbäume, Wälder, zusammenhängende Teilgraphen, azyklische Orientierungen und Färbungen mit drei und vier Farben. Fast jede Zahl ist gegen einen unabhängigen Weg geprüft (Kirchhoff, Zählen, Transfermatrix, Aufzählen, Teilmengensumme); wo die Prüfwege zu langsam sind, steht „nur bis …“ und die Zahl bleibt ungeprüft.")
 values = _values()
 st.dataframe([{"Graph": r["Graph"], "Knoten": r["Knoten"], "Kanten": r["Kanten"], "Monome": r["Monome"], "Spannbäume": big_text(r["Spannbäume"]), "Wälder": big_text(r["Wälder"]), "zusammenhängende Teilgraphen": big_text(r["Teilgraphen"]),
                "azyklische Orientierungen": big_text(r["Orientierungen"]), "Färbungen k = 3": big_text(r["P3"]), "Färbungen k = 4": big_text(r["P4"]), "Prüfungen gleich": f"{r['gleich']} von {r['Prüfungen']}"} for r in values], hide_index=True, width="stretch")
@@ -241,7 +241,7 @@ st.markdown(
     f"""
 | Annahme | Was passiert, wenn sie verletzt ist | Wer setzt an |
 |---|---|---|
-| **Die Frontier bleibt schmal** | Die Rechnung ist exponentiell in der Frontierbreite: im ebenen Gitter wächst die größte Schicht wie die Catalan-Zahl C(n) (1.430 beim 8×8-Gitter), bei dichten Graphen wie die Bell-Zahl. Das Tutte-Polynom ist im Allgemeinen #P-schwer. | Experiment 3 |
+| **Die Frontier bleibt schmal** | Die Rechnung ist exponentiell in der Frontierbreite: bei quadratischen Gittern wächst die größte Schicht wie die Catalan-Zahl C(n) (gemessen bis 8×8, dort 1.430), bei dichten Graphen höchstens wie die Bell-Zahl der Frontierbreite. Das Tutte-Polynom ist im Allgemeinen #P-schwer. | Experiment 3 |
 | **Die Kantenordnung ist gut** | Dasselbe Gitter hat als 3×8 (Frontier 9) 17.657 Zustände, als 8×3 (Frontier 4) nur 171; die beste Ordnung zu finden ist selbst schwer, die App kennt nur Zeile und Spalte. | Experiment 3 |
 | **Der Graph ist zusammenhängend** | Die Formeln für Färbungen und Zuverlässigkeit sind für mehrere Komponenten angepasst, aber die App prüft die Kantenliste auf Zusammenhang und lehnt andere Listen ab. | Spielwiese |
 | **Zusammenfassen gleicher Teilgraphen ist einfach** | Es fasst nur zusammen, was nach Umbenennung gleich ist, nicht isomorphe Graphen; ein Isomorphietest würde mehr sparen, kostet aber selbst. | Experiment 1 |
